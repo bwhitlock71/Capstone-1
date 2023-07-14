@@ -2,7 +2,9 @@
 
 {% for brewery in brewery_info %}
 <div>
-    <li><ul>{{ brewery.name }} {{ brewery.state }} {{ brewery.city }}</ul></li>
+    <ul>
+        <li>{{ brewery.name }} {{ brewery.state }} {{ brewery.city }}</li>
+    </ul>
 </div>
 {% endfor %}
 
