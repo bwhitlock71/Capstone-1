@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+
+{% for brewery in brewery_info %}
+<div>
+    <li><ul>{{ brewery.name }} {{ brewery.state }} {{ brewery.city }}</ul></li>
+</div>
+{% endfor %}
+
+{% endblock %}
