@@ -39,4 +39,4 @@ def search_route():
         url = f'https://api.openbrewerydb.org/v1/breweries?by_city={city}&by_state={state}'
         response = requests.get(url)
         brewery_info = response.json()
-        return render_template('search.html', brewery_info=brewery_info)
+        return render_template('search.html', form=form, brewery_info=brewery_info)
