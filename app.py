@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_debugtoolbar import DebugToolbarExtension
 import requests
 
@@ -29,5 +29,10 @@ def test_run():
     city = request.args.get('city')
     url = f'https://api.openbrewerydb.org/v1/breweries?by_city={city}&by_state={state}'
     response = requests.get(url)
+    if response.status_code != 200:
+        flash("No results :(", "Please try again")
+        return render_template('base.html')
     brewery_info = response.json()
     return render_template('list.html', brewery_info=brewery_info)
+    
+    
