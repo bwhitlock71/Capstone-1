@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST" action="/">
+<form method="POST" action="/type">
     {{ form.csrf_token }}
     {{ form.city.label }} {{ form.city(size=20) }}
     {{ form.state.label }} {{ form.state(size=20) }}
+    {{ form.category.label }} {{ form.category(size=20) }}
     <input type="submit" value="Go">
 </form>
-<p>Looking for something more specific?</p>
-<a href="/type">Click here</a>
+<p>You can filter your serch by trying "micro", "bar", "nano", "brewpub", and others give it a shot!</p>
 {% for brewery in brewery_info %}
 <div>
     <ul>
-        <li>{{ brewery.name }} 
+        <li>{{ brewery.name }} {{ brewery.brewery_type }}
             <br>
             {{ brewery.city }} {{ brewery.state }} 
             <br>
@@ -23,6 +23,5 @@
         </li>
     </ul>
 </div>
-
 {% endfor %}
 {% endblock %}
