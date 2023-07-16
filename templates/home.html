@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lookup Breweries by State!</title>
-</head>
-<body>
-    <h1>Brewery by State</h1>
-    <div class="test">
-        <form action="/submission">
-        Search State<input name="state"> 
-        <br>  
-        Search City<input name="city">
-        <button>Search!</button>
-        </form>
-    </div>
- 
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<form method="POST" action="/">
+    {{ form.csrf_token }}
+    {{ form.city.label }} {{ form.city(size=20) }}
+    {{ form.state.label }} {{ form.state(size=20) }}
+    <input type="submit" value="Go">
+</form>
+{% for brewery in brewery_info %}
+<div>
+    <ul>
+        <li>{{ brewery.name }} {{ brewery.state }} {{ brewery.city }}</li>
+    </ul>
+</div>
+{% endfor %}
+{% endblock %}
