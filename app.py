@@ -31,6 +31,7 @@ def search_route():
 def type_of_route():
     form = SpecificForm()
 
+    
     if form.validate_on_submit():
         city = form.city.data
         state = form.state.data
