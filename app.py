@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, flash
 from flask_debugtoolbar import DebugToolbarExtension
-from forms import SearchForm
+from forms import SearchForm, SpecificForm
 import requests
 
 
@@ -25,3 +25,20 @@ def search_route():
     
 
     return render_template('home.html', form=form)
+
+
+@app.route('/type', methods=['GET', 'POST'])
+def type_of_route():
+    form = SpecificForm()
+
+    if form.validate_on_submit():
+        city = form.city.data
+        state = form.state.data
+        category = form.category.data
+        url = f'https://api.openbrewerydb.org/v1/breweries?by_city={city}&by_state={state}&by_type={category}'
+        response = requests.get(url)
+        brewery_info = response.json()
+        return render_template('specific.html', form=form, brewery_info=brewery_info)
+    
+
+    return render_template('specific.html', form=form)
