@@ -2,12 +2,11 @@
 {% block content %}
 <form method="POST" action="/">
     {{ form.csrf_token }}
-    {{ form.city.label }} {{ form.city(size=20) }}
-    {{ form.state.label }} {{ form.state(size=20) }}
+    {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }} 
+    {{ form.state.label }} {{ form.state(size=20, placeholder='ex: Washington') }}
     <input type="submit" value="Go">
 </form>
-<p>Looking for something more specific?</p>
-<a href="/type">Click here</a>
+<p>Looking for something more specific? <a href="/type">Click here</a></p>
 {% for brewery in brewery_info %}
 <div>
     <ul>
@@ -17,9 +16,9 @@
             <br>
             {{ brewery.street }}{{ brewery.postal_code}}
             <br>
-            {{ brewery.phone }}
+            Phone Number: {{ brewery.phone }}
             <br>
-            {{ brewery.website_url }}
+            <a href="{{ brewery.website_url }}">Website Link</a>
         </li>
     </ul>
 </div>

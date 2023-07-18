@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
 </head>
-<body></body>
+<body>
+<h1>Welcome to Brewery search</h1>
 {% with messages = get_flashed_messages() %}
 {% if messages %}
-  <ul class=flashes>
   {% for message in messages %}
-    <li>{{ message }}</li>
+    <p>{{ message }}</p>
+    <a href="/">Home page</a>
   {% endfor %}
-  </ul>
+
 {% endif %}
 {% endwith %}
-<h1>Welcome to Brewery search</h1>
+
     {% block content %}
     
     
