@@ -47,19 +47,27 @@ class Brewery(db.model):
     id = db.Column( db.Integer, primary_key=True)
 
 
+
 class Reviews(db.model):
 
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
 
-    text = db.Column(db.String(150), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), ondelete='CASCADE')
+    brewery_id = db.Column(db.Integer, db.ForeignKey('brewery.id', ondelete='CASCADE'))
+    rating = db.Column(db.Integer)
+    comments = db.Column(db.String(150), nullable=False)
 
-    user = db.relationship('User')
+
+    user = db.relationship('User', backref='review')
+    brewery = db.relationship('Brewery', backref='review')
 
 
+def connect_db(app):
 
+    db.app = app
+    db.init_app(app)
 
 
 
