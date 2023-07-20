@@ -9,7 +9,7 @@ class User(db.Model):
 
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True,)
+    id = db.Column(db.Integer, primary_key=True)
 
     email = db.Column(db.Text, nullable=False,unique=True)
     username = db.Column( db.Text, nullable=False,unique=True)
@@ -40,28 +40,31 @@ class User(db.Model):
         return False
 
 
-class Brewery(db.model):
+
+class Brewery(db.Model):
 
     __tablename__ = 'brewery'
 
-    id = db.Column( db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+
+    name = db.Column(db.String(50), nullable=False)
 
 
 
-class Reviews(db.model):
+class Reviews(db.Model):
 
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), ondelete='CASCADE')
-    brewery_id = db.Column(db.Integer, db.ForeignKey('brewery.id', ondelete='CASCADE'))
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    brewery = db.Column(db.Integer, db.ForeignKey('brewery.id'))
     rating = db.Column(db.Integer)
     comments = db.Column(db.String(150), nullable=False)
 
 
-    user = db.relationship('User', backref='review')
-    brewery = db.relationship('Brewery', backref='review')
+    user = db.relationship('User', backref='reviews')
+    brewery = db.relationship('Brewery', backref='reviews')
 
 
 def connect_db(app):
