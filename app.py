@@ -3,7 +3,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
 from forms import SearchForm, SpecificForm, UserAddForm, LoginForm
-from models import db, connect_db, User, Brewery, Reviews
+from models import db, connect_db, User, Reviews
 
 import requests
 
@@ -136,3 +136,19 @@ def type_of_route():
     
 
     return render_template('specific.html', form=form)
+
+
+@app.route('/random', methods=['GET', 'POST'])
+def random():
+    url = f'https://api.openbrewerydb.org/v1/breweries/random'
+    response = requests.get(url)
+    brewery_info = response.json()
+    return render_template('random.html', brewery_info=brewery_info)
+
+
+@app.route('/review', methods= ['GET', 'POST'])
+def review():
+
+    return render_template('users/review.html')
+
+
