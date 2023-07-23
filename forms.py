@@ -26,5 +26,6 @@ class SpecificForm(FlaskForm):
                            )
     
 class Reviews(FlaskForm):
-    rating = SelectField('Rating', validators=[DataRequired()])
+    rating = RadioField('Rating', validators=[DataRequired()],
+                         choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5','5')])
     comments = StringField('Comments', validators=[DataRequired()])
