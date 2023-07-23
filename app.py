@@ -149,6 +149,11 @@ def random():
 @app.route('/review', methods= ['GET', 'POST'])
 def review():
 
-    return render_template('users/review.html')
+    brewery = request.args.get('brewery')
+    brewery_id = request.args.get('brewery_id')
+    info = f'/review?brewery_name={brewery}&brewery_id={brewery_id}'
+    response = requests.get(info)
+    data = response
+    return data
 
 
