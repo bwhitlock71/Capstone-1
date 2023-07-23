@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+<a href="/signup">Sign up</a>
+<a href="/login">login</a>
 <form method="POST" action="/">
     {{ form.csrf_token }}
     {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }} 
@@ -7,7 +9,9 @@
     <input type="submit" value="Go">
 </form>
 <p>Looking for something more specific? <a href="/type">Click here</a></p>
+<p>Or maybe something a little more <a href='/random'>random?</a></p>
 {% for brewery in brewery_info %}
+
 <div>
     <ul>
         <li>{{ brewery.name }} 
@@ -20,6 +24,7 @@
             <br>
             <a href="{{ brewery.website_url }}">Website Link</a>
         </li>
+        <a href=/review?{brewery_name=brewery&brewery_id={brewery_id}>Leave a review</a>
     </ul>
 </div>
 

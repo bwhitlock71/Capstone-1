@@ -1,13 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST" action="/type">
-    {{ form.csrf_token }}
-    {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }}
-    {{ form.state.label }} {{ form.state(size=20, placeholder='ex: Washington') }}
-    <br>
-    {{ form.category.label }} {{ form.category(size=20) }}
-    <input type="submit" value="Go">
-</form>
 
 {% for brewery in brewery_info %}
 <div>
@@ -18,13 +10,13 @@
             <br>
             {{ brewery.street }}{{ brewery.postal_code}}
             <br>
-            {{ brewery.phone }}
+            Phone Number: {{ brewery.phone }}
             <br>
             <a href="{{ brewery.website_url }}">Website Link</a>
         </li>
             <a href="/review">Leave a Review!</a>
     </ul>
-    
 </div>
+
 {% endfor %}
 {% endblock %}
