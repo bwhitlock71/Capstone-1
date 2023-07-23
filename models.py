@@ -14,7 +14,7 @@ class User(db.Model):
     email = db.Column(db.Text, nullable=False,unique=True)
     username = db.Column( db.Text, nullable=False,unique=True)
     password = db.Column(db.Text, nullable=False)
-
+    
     reviews = db.relationship('Reviews')
 
     @classmethod
@@ -41,32 +41,21 @@ class User(db.Model):
 
 
 
-class Brewery(db.Model):
-
-    __tablename__ = 'brewery'
-
-    id = db.Column(db.Integer, primary_key=True)
-
-    name = db.Column(db.String(50), nullable=False)
-
-
-
+# add api call for brewery id 
 class Reviews(db.Model):
 
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
 
-    user = db.Column(db.Integer, db.ForeignKey('users.id'))
-    brewery = db.Column(db.Integer, db.ForeignKey('brewery.id'))
+    user_reviews = db.Column(db.Integer, db.ForeignKey('users.id'))
+    brewery = db.Column(db.String) #"b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0"
     rating = db.Column(db.Integer)
     comments = db.Column(db.String(150), nullable=False)
 
 
-    user = db.relationship('User', backref='reviews')
-    brewery = db.relationship('Brewery', backref='reviews')
-
-
+   
+    
 def connect_db(app):
 
     db.app = app
