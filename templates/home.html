@@ -24,7 +24,7 @@
             <br>
             <a href="{{ brewery.website_url }}">Website Link</a>
         </li>
-        <a href=/review?{brewery_name=brewery&brewery_id={brewery_id}>Leave a review</a>
+        <a href='/review?brewery_name={{ brewery.name }}&brewery_id={{ brewery.id }}'>Leave a review</a>
     </ul>
 </div>
 
