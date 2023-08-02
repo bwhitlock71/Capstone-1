@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, flash, redirect, session, g
+from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import SearchForm, SpecificForm, UserAddForm, LoginForm
+from forms import SearchForm, SpecificForm, UserAddForm, LoginForm, Ratings
 from models import db, connect_db, User, Reviews
 
 import requests
@@ -121,7 +121,6 @@ def search_route():
 def type_of_route():
     form = SpecificForm()
 
-    
     if form.validate_on_submit():
         city = form.city.data
         state = form.state.data
@@ -148,12 +147,27 @@ def random():
 
 @app.route('/review', methods= ['GET', 'POST'])
 def review():
+    if request.method == 'POST':
+        print(str(request.form))
 
-    brewery = request.args.get('brewery')
     brewery_id = request.args.get('brewery_id')
-    info = f'/review?brewery_name={brewery}&brewery_id={brewery_id}'
-    response = requests.get(info)
-    data = response
-    return data
+    url = f"https://api.openbrewerydb.org/v1/breweries/{brewery_id}"
+    response = requests.get(url)
+    brewery_info = response.json()
+    form = Ratings()
+
+    if not g.user:
+        flash("Please signup to leave reviews")
+        return redirect('/')
+    
+    if form.validate_on_submit():
+        review = Reviews(review=form.rating.data)
+        brewery = Reviews(brewery=form.brewery_id.data)
+        g.user.ratings.append(review)
+        g.user.brewery_id.append(brewery)
+        db.session.commit()
+    return render_template('users/review.html', brewery_info=brewery_info, form=form)
+
+
 
 
