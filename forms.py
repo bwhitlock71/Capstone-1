@@ -25,7 +25,7 @@ class SpecificForm(FlaskForm):
                            choices=[('micro', 'Mirco- Most craft breweries. For example, Samual Adams is still considered a micro brewery.'), ('nano', 'Nano- An extremely small brewery which typically only distributes locally.'), ('brewpub', 'Brewpub- A beer-focused restaurant or restaurant/bar with a brewery on-premise.'), ('bar', 'Bar- A bar. No brewery equipment on premise.')]
                            )
     
-class Reviews(FlaskForm):
+class Ratings(FlaskForm):
     rating = RadioField('Rating', validators=[DataRequired()],
                          choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5','5')])
     comments = StringField('Comments', validators=[DataRequired()])
