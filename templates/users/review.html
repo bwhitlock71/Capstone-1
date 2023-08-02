@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<p> {{ brewery.name }} {{ brewery.id }}</p>
+<form method="POST" action="/review">
+{{ form.rating.label }} {{ form.rating(size=20) }}
+{{ form.comments.label }} {{ form.comments(size=500) }}
+<input type="hidden" name="brewery_id" value="{{ brewery_info.id }}">
+<input type="submit">
+</form>
 
 
 
