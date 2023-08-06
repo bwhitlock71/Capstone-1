@@ -2,6 +2,7 @@
 {% block content %}
 <a href="/signup">Sign up</a>
 <a href="/login">login</a>
+<a href="/logout">logout</a>
 <form method="POST" action="/">
     {{ form.csrf_token }}
     {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }} 
@@ -9,7 +10,8 @@
     <input type="submit" value="Go">
 </form>
 <p>Looking for something more specific? <a href="/type">Click here</a></p>
-<p>Or maybe something a little more <a href='/random'>random?</a></p>
+<p>Or maybe something a little more <a href="/random">random?</a></p>
+<p>Past reviews<a href="/getreviews">Here</a></p>
 {% for brewery in brewery_info %}
 
 <div>

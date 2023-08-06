@@ -5,6 +5,7 @@
 {{ form.rating.label }} {{ form.rating(size=20) }}
 {{ form.comments.label }} {{ form.comments(size=500) }}
 <input type="hidden" name="brewery_id" value="{{ brewery_info.id }}">
+<input type="hidden" name="brewery_name" value="{{ brewery_info.name }}">
 <input type="submit">
 </form>
 

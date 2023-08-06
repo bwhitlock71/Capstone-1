@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for reviews in reviews %}
+<p>{{ reviews.brewery_id }}</p>
+{% endfor %}
+{% endblock %}
