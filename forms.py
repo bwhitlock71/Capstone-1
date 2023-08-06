@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, RadioField, PasswordField
+from wtforms import StringField, SelectField, RadioField, PasswordField, HiddenField
 from wtforms.validators import DataRequired, Length, Email
 
 class LoginForm(FlaskForm):
@@ -29,3 +29,5 @@ class Ratings(FlaskForm):
     rating = RadioField('Rating', validators=[DataRequired()],
                          choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5','5')])
     comments = StringField('Comments', validators=[DataRequired()])
+    brewery_id = HiddenField()
+    brewery_name = HiddenField()

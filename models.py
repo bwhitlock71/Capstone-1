@@ -49,7 +49,7 @@ class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     user_reviews = db.Column(db.Integer, db.ForeignKey('users.id'))
-    brewery = db.Column(db.String) #"b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0"
+    brewery_id = db.Column(db.String) #"b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0"
     brewery_name = db.Column(db.String)
     rating = db.Column(db.Integer)
     comments = db.Column(db.String(500), nullable=False)

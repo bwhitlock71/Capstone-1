@@ -147,8 +147,6 @@ def random():
 
 @app.route('/review', methods= ['GET', 'POST'])
 def review():
-    if request.method == 'POST':
-        print(str(request.form))
 
     brewery_id = request.args.get('brewery_id')
     url = f"https://api.openbrewerydb.org/v1/breweries/{brewery_id}"
@@ -160,14 +158,13 @@ def review():
         flash("Please signup to leave reviews")
         return redirect('/')
     
-    if form.validate_on_submit():
-        review = Reviews(review=form.rating.data)
-        brewery = Reviews(brewery=form.brewery_id.data)
-        g.user.ratings.append(review)
-        g.user.brewery_id.append(brewery)
+    if request.method == 'POST':
+        print(str(request.form))
+        rating = Reviews(rating=form.rating.data, comments=form.comments.data, brewery_id=form.brewery_id.data, brewery_name=form.brewery_name.data, user_reviews=g.user.id)
+##       brewery_id = request.form['brewery_id']
+        db.session.add(rating)
+##       g.Reviews.brewery_id.append(brewery)
         db.session.commit()
     return render_template('users/review.html', brewery_info=brewery_info, form=form)
-
-
 
 
