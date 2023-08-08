@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for review in reviews %}
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Brewery Name</th>
+                <th>Rating</th>
+                <th>Comments</th>
+                <th>User</th>
+            </tr>
+            <thead>
+        <tbody>
+            <tr>
+                <td>{{ review.brewery_name }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.comments }}</td>
+                <td>{{ review.user_reviews }}</td>
+            </tr>
+        </tbody>
+</table>
+</div>
+
+{% endfor %}
+{% endblock %}
+
