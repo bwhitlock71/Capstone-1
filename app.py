@@ -120,6 +120,7 @@ def search_route():
 @app.route('/type', methods=['GET', 'POST'])
 def type_of_route():
     form = SpecificForm()
+    reviews = Reviews
 
     if form.validate_on_submit():
         city = form.city.data
@@ -161,10 +162,16 @@ def review():
     if request.method == 'POST':
         print(str(request.form))
         rating = Reviews(rating=form.rating.data, comments=form.comments.data, brewery_id=form.brewery_id.data, brewery_name=form.brewery_name.data, user_reviews=g.user.id)
-##       brewery_id = request.form['brewery_id']
         db.session.add(rating)
-##       g.Reviews.brewery_id.append(brewery)
         db.session.commit()
     return render_template('users/review.html', brewery_info=brewery_info, form=form)
+
+
+@app.route('/pastreviews', methods=['GET', 'POST'])
+def show_reviews():
+
+    reviews = Reviews.query.all()
+    return render_template('/pastreviews.html', reviews=reviews)
+
 
 
