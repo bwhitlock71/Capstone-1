@@ -158,7 +158,7 @@ def review():
     if not g.user:
         flash("Please signup to leave reviews")
         return redirect('/')
-    
+## Update function for when selecting only one brewery   
     if request.method == 'POST':
         print(str(request.form))
         rating = Reviews(rating=form.rating.data, comments=form.comments.data, brewery_id=form.brewery_id.data, brewery_name=form.brewery_name.data, user_reviews=g.user.id)
