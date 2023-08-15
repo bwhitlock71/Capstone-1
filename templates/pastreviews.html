@@ -1,28 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div class="p-3 mb-2 bg-dark text-white">
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <ul class="nav justify-content-center">
+            <li><a class="nav-link" href="/">Home</a></li>
+        </ul>
+    </div>
+  </nav>
+  </div>
 {% for review in reviews %}
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>Brewery Name</th>
-                <th>Rating</th>
-                <th>Comments</th>
-                <th>User</th>
-            </tr>
-            <thead>
-        <tbody>
-            <tr>
-                <td>{{ review.brewery_name }}</td>
-                <td>{{ review.rating }}</td>
-                <td>{{ review.comments }}</td>
-                <td>{{ review.user_reviews }}</td>
-            </tr>
-        </tbody>
-</table>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-3">
+            <div class="card text-white border border-white bg-dark">
+                <div class="card-header">{{ review.brewery_name}}</div>
+                    <div class="card-body border border-white">
+                        <h6>Rating: {{ review.rating }}/5</h6>
+                        <h6>Comments: {{ review.comments }}</h6>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
-
+<br>
 {% endfor %}
 {% endblock %}
 

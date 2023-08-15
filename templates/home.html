@@ -1,46 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="p-3 mb-2 bg-dark text-white">
-    <nav class="navbar bg-primary" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/signup">Sign up</a> 
-            <a class="navbar-brand" href="/login">Login</a>
-            <a class="navbar-brand" href="/logout">Logout</a>  
-        
-        </div>
-    </nav>
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <ul class="nav justify-content-center">
+            <li><a class="nav-link" href="/signup">Sign up</a></li>
+            <li><a class="nav-link" href="/login">Login</a></li>
+            <li><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
 <br>
-
+<div class="container text-center">
+<h1>Welcome to On Tap</h1>
+<br>
+<p>By using On Tap you can search for the next brewery you want to visit! Please use our search bar below or feel free to try the other options below. </p>
 <form method="POST" action="/">
+    <h6>
     {{ form.csrf_token }}
     {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }} 
     {{ form.state.label }} {{ form.state(size=20, placeholder='ex: Washington') }}
     <input type="submit" value="Go">
+    </h6>
 </form>
-<div>
-<p>Looking for something more specific? <a href="/type">Click here</a></p>
-<p>Or maybe something a little more <a href="/random">random?</a></p>
-<p>Past reviews<a href="/pastreviews">Here</a></p>
+<h6>Looking for something more <a href="/type">specific?</a></h6>
+<h6>Or maybe something a little more <a href="/random">random?</a></h6>
+<h6><a href="/pastreviews">Reviews</a></h6>
 </div>
-<div class="p-3 mb-2 bg-dark text-white">
+<br>
 {% for brewery in brewery_info %}
-
-<div class="p-3 mb-2 bg-dark text-white">
-    <ul>
-        <li><h3>{{ brewery.name }}</h3>
-            <br>
-            {{ brewery.city }} {{ brewery.state }}
-            <br>
-            {{ brewery.street }}{{ brewery.postal_code}}
-            <br>
-            Phone Number: {{ brewery.phone }}
-            <br>
-            <a href="{{ brewery.website_url }}">Website Link</a>
-        </li>
-        <a href='/review?brewery_id={{ brewery.id }}'>Leave a review</a>
-    </ul>
-
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-3">
+            <div class="card text-white border border-white bg-dark">
+                <div class="card-header">{{ brewery.name }}</div>
+                    <div class="card-body border border-white">
+                        <h6>{{ brewery.city }}, {{ brewery.state }}</h6>
+                        <h6>Address: {{ brewery.street }}</h6>
+                        <h6>Zip Code: {{ brewery.postal_code}}</h6>
+                        <h6>Phone Number: {{ brewery.phone }}</h6>
+                        <h6><a href="{{ brewery.website_url }}">Website Link</a></h6>
+                        <h6><a href='/review?brewery_id={{ brewery.id }}'>Leave a review</a></h6>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
+<br>
 {% endfor %}
 {% endblock %}

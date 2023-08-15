@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="row justify-content-md-center">
-  <div class="col-md-7 col-lg-5">
-    
+<div class="p-3 mb-2 bg-dark text-white">
+  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container-fluid">
+      <ul class="nav justify-content-center">
+          <li><a class="nav-link" href="/">Home</a></li>
+          <li><a class="nav-link" href="/login">Login</a></li>
+          <li><a class="nav-link" href="/logout">Logout</a></li>
+      </ul>
+  </div>
+</nav>
+</div>
+<div class="container text-center">
+<div class="row align-items-center">
+  <div class="col">
     <form method="POST" id="user_form">
       {{ form.hidden_tag() }}
-
       {% for field in form if field.widget.input_type != 'hidden' %}
         {% for error in field.errors %}
           <span class="text-danger">{{ error }}</span>
         {% endfor %}
         {{ field(placeholder=field.label.text, class="form-control") }}
       {% endfor %}
-      
+      <br>
       <button class="btn btn-primary btn-lg btn-block">Sign me up!</button>
     </form>
   </div>

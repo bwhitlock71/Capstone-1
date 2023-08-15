@@ -1,22 +1,32 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<div class="p-3 mb-2 bg-dark text-white">
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+        <ul class="nav justify-content-center">
+            <li><a class="nav-link" href="/">Home</a></li>
+        </ul>
+    </div>
+  </nav>
+  </div>
 {% for brewery in brewery_info %}
-<div>
-    <ul>
-        <li>{{ brewery.name }} 
-            <br>
-            {{ brewery.city }} {{ brewery.state }} 
-            <br>
-            {{ brewery.street }}{{ brewery.postal_code}}
-            <br>
-            Phone Number: {{ brewery.phone }}
-            <br>
-            <a href="{{ brewery.website_url }}">Website Link</a>
-        </li>
-            <a href="/review?brewery_id={{ brewery.id }}">Leave a Review!</a>
-    </ul>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-3">
+            <div class="card text-white border border-white bg-dark">
+                <div class="card-header">{{ brewery.name }}</div>
+                    <div class="card-body border border-white">
+                        <h6>{{ brewery.city }}, {{ brewery.state }}</h6>
+                        <h6>Address: {{ brewery.street }}</h6>
+                        <h6>Zip Code: {{ brewery.postal_code}}</h6>
+                        <h6>Phone Number: {{ brewery.phone }}</h6>
+                        <h6><a href="{{ brewery.website_url }}">Website Link</a></h6>
+                        <h6><a href='/review?brewery_id={{ brewery.id }}'>Leave a review</a></h6>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
-
 {% endfor %}
+</div>
 {% endblock %}

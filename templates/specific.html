@@ -1,30 +1,48 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST" action="/type">
-    {{ form.csrf_token }}
-    {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }}
-    {{ form.state.label }} {{ form.state(size=20, placeholder='ex: Washington') }}
-    <br>
-    {{ form.category.label }} {{ form.category(size=20) }}
-    <input type="submit" value="Go">
+<div class="p-3 mb-2 bg-dark text-white">
+    <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+            <ul class="nav justify-content-center">
+                <li><a class="nav-link" href="/">Home</a></li>
+                <li><a class="nav-link" href="/signup">Sign up</a></li>
+                <li><a class="nav-link" href="/login">Login</a></li>
+                <li><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+<br>
+<div class="container text-center">
+    <form method="POST" action="/type">
+        {{ form.csrf_token }}
+        {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }}
+        {{ form.state.label }} {{ form.state(size=20, placeholder='ex: Washington') }}
+    <div class="container text-center">
+        <div class="row align-items-center">
+            {{ form.category.label }}  {{ form.category(size=20) }}
+        </div>
+    </div>
+        <input type="submit" value="Go">
 </form>
-
+<br>
 {% for brewery in brewery_info %}
-<div>
-    <ul>
-        <li>{{ brewery.name }} 
-            <br>
-            {{ brewery.city }} {{ brewery.state }} 
-            <br>
-            {{ brewery.street }}{{ brewery.postal_code}}
-            <br>
-            {{ brewery.phone }}
-            <br>
-            <a href="{{ brewery.website_url }}">Website Link</a>
-        </li>
-            <a href="/review?brewery_name={{ brewery.name }}&brewery_id={{ brewery.id }}">Leave a Review!</a>
-    </ul>
-    
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-3">
+            <div class="card text-white border border-white bg-dark">
+                <div class="card-header">{{ brewery.name }}</div>
+                    <div class="card-body border border-white">
+                        <h6>{{ brewery.city }}, {{ brewery.state }}</h6>
+                        <h6>Address: {{ brewery.street }}</h6>
+                        <h6>Zip Code: {{ brewery.postal_code}}</h6>
+                        <h6>Phone Number: {{ brewery.phone }}</h6>
+                        <h6><a href="{{ brewery.website_url }}">Website Link</a></h6>
+                        <h6><a href='/review?brewery_id={{ brewery.id }}'>Leave a review</a></h6>
+                    </div>
+            </div>
+        </div>
+    </div>
 </div>
+<br>
 {% endfor %}
 {% endblock %}
