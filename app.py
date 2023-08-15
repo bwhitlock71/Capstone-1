@@ -120,7 +120,6 @@ def search_route():
 @app.route('/type', methods=['GET', 'POST'])
 def type_of_route():
     form = SpecificForm()
-    reviews = Reviews
 
     if form.validate_on_submit():
         city = form.city.data
@@ -157,12 +156,13 @@ def review():
 
     if not g.user:
         flash("Please signup to leave reviews")
-        return redirect('/')
+        return redirect('/signup')
     if request.method == 'POST':
         print(str(request.form))
         rating = Reviews(rating=form.rating.data, comments=form.comments.data, brewery_id=form.brewery_id.data, brewery_name=form.brewery_name.data, user_reviews=g.user.id)
         db.session.add(rating)
         db.session.commit()
+        flash("Success, your review has been added to the reviews page")
     return render_template('users/review.html', brewery_info=brewery_info, form=form)
 
 
