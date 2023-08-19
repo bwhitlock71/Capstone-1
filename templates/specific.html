@@ -13,6 +13,7 @@
     </nav>
 <br>
 <div class="container text-center">
+    <img src="/static/cheers.jpeg" alt="logo">
     <form method="POST" action="/type">
         {{ form.csrf_token }}
         {{ form.city.label }} {{ form.city(size=20, placeholder='ex: Seattle') }}

@@ -1,0 +1,16 @@
+body {
+    min-height: 100vh;
+}
+
+.primary-container {
+    min-height: 100vh;
+}
+
+img {
+    align-items: center;
+    height: 200px;
+    width: 200px;
+    margin: 20px;
+    border-radius: 100px;
+}
+
