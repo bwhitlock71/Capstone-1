@@ -12,7 +12,7 @@ CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATA_BASE_URI")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATA_BASE_URL")
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
