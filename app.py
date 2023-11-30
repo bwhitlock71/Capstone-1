@@ -43,7 +43,7 @@ def do_logout():
     if CURR_USER_KEY in session:
         del session[CURR_USER_KEY]
 
-
+# Returns the signup page for new users to register.
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
 
@@ -71,7 +71,7 @@ def signup():
     else:
         return render_template('users/signup.html', form=form)
 
-
+# Returns the login page for registered users.
 @app.route('/login', methods=["GET", "POST"])
 def login():
 
@@ -99,6 +99,7 @@ def logout():
     flash("You have logged out.")
     return redirect("/login")
 
+# Returns the home page with the search form present.
 @app.route('/', methods=['GET', 'POST'])
 def search_route():
     form = SearchForm()
@@ -117,7 +118,7 @@ def search_route():
 
     return render_template('home.html', form=form)
 
-
+# Search that allows the user to filter their results by the selected fields.
 @app.route('/type', methods=['GET', 'POST'])
 def type_of_route():
     form = SpecificForm()
@@ -137,7 +138,7 @@ def type_of_route():
 
     return render_template('specific.html', form=form)
 
-
+# Returns random brewery.
 @app.route('/random', methods=['GET', 'POST'])
 def random():
     url = f'https://api.openbrewerydb.org/v1/breweries/random'
@@ -145,7 +146,7 @@ def random():
     brewery_info = response.json()
     return render_template('random.html', brewery_info=brewery_info)
 
-
+# Returns the review page for user to fill out.
 @app.route('/review', methods= ['GET', 'POST'])
 def review():
 
@@ -166,7 +167,7 @@ def review():
         flash("Success, your review has been added to the reviews page")
     return render_template('users/review.html', brewery_info=brewery_info, form=form)
 
-
+# Returns all reviews by all users.
 @app.route('/pastreviews', methods=['GET', 'POST'])
 def show_reviews():
 
