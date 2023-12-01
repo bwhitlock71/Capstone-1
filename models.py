@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
+
 class User(db.Model):
 
     __tablename__ = 'users'
@@ -40,7 +41,7 @@ class User(db.Model):
         return False
 
 
-
+# Reviews class uses ForeignKey to link the users to the Reviews table creating the primary/foreign key relationship.
 class Reviews(db.Model):
 
     __tablename__ = 'reviews'
